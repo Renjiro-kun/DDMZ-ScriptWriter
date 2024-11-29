@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:DDScriptWriter.ViewModels"
+			 xmlns:widgets="clr-namespace:DDScriptWriter"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="DDScriptWriter.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Design.DataContext>
+    <!-- This only sets the DataContext for the previewer in an IDE,
+         to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
+    <vm:MainViewModel />
+  </Design.DataContext>
+	<DockPanel>
+		<Menu DockPanel.Dock="Top">
+			<MenuItem Header="File">
+				<MenuItem Header="New"/>
+				<MenuItem Header="Open"/>
+				<MenuItem Header="Save" Click="SaveScript_Click"/>
+				<MenuItem Header="Exit"/>
+			</MenuItem>
+		</Menu>
+		<!--<widgets:DialogItem DockPanel.Dock="Bottom"/>-->
+
+		<ItemsControl ItemsSource="{Binding MessagesList}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<StackPanel Orientation="Horizontal">
+						<TextBox Text="{Binding ID}"/>
+						<TextBox Text="{Binding Message}"/>
+					</StackPanel>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+		<Button Click="AddLine_Click"> Add line</Button>
+	</DockPanel>
+
+</UserControl>
