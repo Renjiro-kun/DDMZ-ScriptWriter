@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using DDScriptWriter.Logic;
+
 
 namespace DDScriptWriter.ViewModels;
 
@@ -25,9 +27,9 @@ public class MainViewModel : ViewModelBase
     {
 		MessagesList = new ObservableCollection<MessageInternal>(new List<MessageInternal>
 		{
-			new MessageInternal(0, "Test"),
-			new MessageInternal(1, "Test 2"),
-			new MessageInternal(3, "Test 4")
+			new MessageInternal(ScriptManager.Instance.CurrentId, "Test"),
+			new MessageInternal(ScriptManager.Instance.CurrentId, "Test 2"),
+			new MessageInternal(ScriptManager.Instance.CurrentId, "Test 4")
 		});
 	}
 }

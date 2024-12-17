@@ -3,6 +3,7 @@ using System.IO;
 using DDScriptWriter.ViewModels;
 using System.Collections.Generic;
 using Avalonia.Platform.Storage;
+using DDScriptWriter.Logic;
 
 namespace DDScriptWriter.Views;
 
@@ -15,7 +16,7 @@ public partial class MainView : UserControl
 
 	private void AddLine_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
 	{
-        (DataContext as MainViewModel).MessagesList.Add(new MessageInternal( 0, "test" ));
+        (DataContext as MainViewModel).MessagesList.Add(new MessageInternal( ScriptManager.Instance.CurrentId, "test" ));
 	}
 
 
@@ -23,6 +24,7 @@ public partial class MainView : UserControl
 	{
 		var messages = (DataContext as MainViewModel).MessagesList;
 		messages.Clear();
+		ScriptManager.Instance.ResetIdCounter();
 
 		using (var stream = File.Open(filename, FileMode.Open))
 		{
@@ -36,6 +38,7 @@ public partial class MainView : UserControl
 				for (int i = 0; i < messageCount; i++)
 				{
 					short id = reader.ReadInt16();
+					short idTmp = ScriptManager.Instance.CurrentId;
 					short msgType = reader.ReadByte();
 					string text = reader.ReadString();
 					// Removing '\0' from the string

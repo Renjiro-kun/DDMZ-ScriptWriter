@@ -23,16 +23,19 @@
 		</Menu>
 		<!--<widgets:DialogItem DockPanel.Dock="Bottom"/>-->
 
-		<ItemsControl ItemsSource="{Binding MessagesList}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<TextBox Text="{Binding ID}"/>
-						<TextBox Text="{Binding Message}"/>
-					</StackPanel>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>
+		<ScrollViewer>
+			<ItemsControl ItemsSource="{Binding MessagesList}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Margin="3" Orientation="Horizontal">
+							<TextBlock Padding="5" Text="{Binding ID}" />
+							<TextBox Padding="5" Text="{Binding Message}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+
 		<Button DockPanel.Dock="Bottom" Click="AddLine_Click"> Add line</Button>
 	</DockPanel>
 

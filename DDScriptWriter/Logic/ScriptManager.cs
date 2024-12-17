@@ -44,6 +44,39 @@ namespace DDScriptWriter.Logic
 
 	public class ScriptManager
 	{
+		private static ScriptManager _instance = null;
+
+		public static ScriptManager Instance
+		{
+			get
+			{
+				if(_instance == null)
+				{
+					_instance = new ScriptManager();
+				}
+				return _instance;
+			}
+		}
+
+
+		private short _IdCounter;
+
+		public short CurrentId 
+		{
+			get 
+			{
+				short retValue = _IdCounter;
+				_IdCounter++;
+				return retValue;
+			}
+		}
+
+		public void ResetIdCounter() { _IdCounter = 0; }
+
+		private ScriptManager()
+		{
+			_IdCounter = 0;
+		}
 
 	}
 }
